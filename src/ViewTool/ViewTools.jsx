@@ -14,7 +14,7 @@ const ViewTools = (props) => {
     return (
     <div>
 
-    <div>View Tools</div>
+    <div>View Toolz</div>
    {/*  {toolState ? toolState : ''} */}
     </div>
      
