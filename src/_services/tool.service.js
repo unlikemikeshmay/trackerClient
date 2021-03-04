@@ -20,7 +20,7 @@ function getAll() {
 
 
 function handleResponse(response) {
-    console.log("handle response")
+   
     return response.text().then(text => {
         const data = text && JSON.parse(text);
         if (!response.ok) {https://123moviesca.com/godzilla-king-of-the-monsters-2019/

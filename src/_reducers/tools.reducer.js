@@ -9,7 +9,7 @@ export const tools = (state = {}, action) => {
             };
         case toolConstants.GETALL_SUCCESS:
             return {
-                items: action.tools
+                tools: action.tools
             };
         case toolConstants.GETALL_FAILURE:
             return {

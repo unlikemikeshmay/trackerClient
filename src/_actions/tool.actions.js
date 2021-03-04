@@ -2,18 +2,24 @@ import {toolConstants} from '../_constants';
 import {toolService} from '../_services';
 import { alertActions } from './';
 import { history } from '../_helpers';
+import { tools } from '../_reducers/tools.reducer';
 
 export const toolActions = {
     getAll
 }
 function getAll() {
     return dispatch => {
-        dispatch(request());
+       /*  dispatch(request()); */
 
         toolService.getAll()
             .then(
                 tools => dispatch(success(tools)),
-                error => dispatch(failure(error.toString()))
+                console.log("tools in action"),
+                console.log(tools),
+                error => {
+                    dispatch(failure(error.toString()))
+                    dispatch(alertActions.error(error.toString()));
+                }
             );
     };
     

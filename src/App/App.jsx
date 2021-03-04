@@ -21,6 +21,8 @@ class App extends React.Component {
 
     render() {
         const { alert } = this.props;
+        console.log('alert')
+        console.log(alert)
         return (
             <div className="jumbotron">
                 <div className="container">
