@@ -6,14 +6,14 @@ console.log("items")
 
 return (
 <tr className="">
-    <td className="">id</td>
-    <td className="">toolname</td>
-    <td className="">desc</td>
-    <td className="">showname</td>
-    <td className="">lastusr</td>
-    <td className="">lastusrsigntime</td>
-    <td className="">currntuser</td>
-    <td className="">currentusrsignout</td>
+    <td className="">{props.item.uid}</td>
+    <td className="">{props.item.toolname}</td>
+    <td className="">{props.item.description}</td>
+    <td className="">{props.item.lastusersignout}</td>
+    <td className="">{props.item.showname}</td>
+    <td className="">{props.item.signouttime}</td>
+    <td className="">{props.item.currentuserid}</td>
+    <td className="">{props.item.lastusersignout}</td>
 </tr> 
 )
 }

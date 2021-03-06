@@ -1,21 +1,30 @@
 import config from 'config';
 import {authHeader} from '../_helpers';
+import axios from 'axios';
+import api from './api';
 
 export const toolService = { 
     getAll
 }
 
 function getAll() {
-    const requestOptions = {
+    var auth = JSON.parse(localStorage.getItem('user'));
+    var conf = { headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `${auth}`
+    }}
+   response = api.get('/get-tools',conf)
+/*     const requestOptions = {
         method: 'GET',
 
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `${JSON.parse(localStorage.getItem('user'))}`
+            'Authorization': `${auth}`
         }
-    };
+    }; */
     
-    return fetch(`${config.apiUrl}/get-tools`, requestOptions).then(handleResponse);
+    /* return fetch(`${config.apiUrl}/get-tools`, requestOptions).then(handleResponse); */
+    return response
 }
 
 

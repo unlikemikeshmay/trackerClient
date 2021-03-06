@@ -18,8 +18,8 @@ class HomePage extends React.Component {
           <div className="ui container">
             <Header/>
             <div className="ui segment">
-            {/* add stuff here */}
-            <ViewTools/>
+{localStorage.getItem('user') != null ? <ViewTools/> : this.props.history.push('/login')}
+            
             </div>
           </div>
 

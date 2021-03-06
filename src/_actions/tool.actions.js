@@ -3,27 +3,20 @@ import {toolService} from '../_services';
 import { alertActions } from './';
 import { history } from '../_helpers';
 import { tools } from '../_reducers/tools.reducer';
+import api from '../_services/api';
 
-export const toolActions = {
-    getAll
-}
-function getAll() {
-    return dispatch => {
-       /*  dispatch(request()); */
+export const getAll = () => async dispatch => {
+  
 
-        toolService.getAll()
-            .then(
-                tools => dispatch(success(tools)),
-                console.log("tools in action"),
-                console.log(tools),
-                error => {
-                    dispatch(failure(error.toString()))
-                    dispatch(alertActions.error(error.toString()));
-                }
-            );
-    };
-    
-    function request(tools) { return { type: toolConstants.GETALL_REQUEST,tools } }
-    function success(tools) { return { type: toolConstants.GETALL_SUCCESS, tools } }
-    function failure(error) { return { type: toolConstants.GETALL_FAILURE, error } }
+    var auth = JSON.parse(localStorage.getItem('user'));
+    var conf = { headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `${auth}`
+    }}
+  
+   var response = await api.get('/get-tools',conf)
+   console.log("response: ");
+   console.log(response.data)
+    var data = response.data;
+    dispatch({type: toolConstants.GETALL_REQUEST,payload: data})
 }

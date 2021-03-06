@@ -1,33 +1,22 @@
 import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
-
+import _ from 'lodash';
 import { alertActions } from '../_actions';
 import ToolItem from '../ToolItem/ToolItem';
-import { toolActions } from '../_actions';
+import { toolActions,getAll } from '../_actions';
 
 const ViewTools = (props) => {
-    const [toolState ,setTools] = useState({})
+
+   
     useEffect(() => {
         //this.props.clearAlerts();
        
       props.getAll()
-       console.log('toolstate')
-        console.log(props.tools)
+       
     }, [])
-/*     console.log("props")
-console.log(props.tools.tools) */
-/* const items = () => {
-    props.tools.map((item, idx) => {
-       return <ToolItem item={item} key={idx} />
-    })
-}  */
-var tools
-if (props.tools.tools != undefined){
-    tools = Object.entries(props.tools.tools)
+console.log("tools")
+console.log(props.tools)
 
-}else {
-    tools = "fukc"
-}
     return (
         <table className="ui celled inverted selectable table">
             <thead className="">
@@ -43,7 +32,9 @@ if (props.tools.tools != undefined){
                 </tr></thead>
                 <tbody className="">
               
-        
+                {props.tools != undefined ? props.tools.map((item,index) => (
+                    <ToolItem item={item} key={index}/>
+                )): ""}
                     
                 </tbody>
             </table>
@@ -52,13 +43,16 @@ if (props.tools.tools != undefined){
 }
 
 const mapStateToProps = (state) => {
-    console.log("state")
-    console.log(state)
     return {tools: state.tools}
 }
 const actionCreators = {
-    getAll: toolActions.getAll,
+    getAll: getAll,
     clearAlerts: alertActions.clear
 }
 const connectedViewToolPage = connect(mapStateToProps,actionCreators)(ViewTools)
 export {connectedViewToolPage as ViewTools};
+const renderTools = () => {
+    props.tools.map((item , i) => {
+      return  <ToolItem item={item} key={i} />
+    })
+}
