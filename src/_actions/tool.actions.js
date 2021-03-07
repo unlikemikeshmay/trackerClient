@@ -12,11 +12,22 @@ export const getAll = () => async dispatch => {
     var conf = { headers: {
         'Content-Type': 'application/json',
         'Authorization': `${auth}`
+        /* eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2MTUxMzA5MDMsInVzZXIiOiJ0ZXN0QHRlc3QuY29tIn0.ELZfjw4w_TDEo8SF0QxOBgx1FDkkAWNtZDhXloOssM8 */
     }}
   
    var response = await api.get('/get-tools',conf)
    console.log("response: ");
    console.log(response.data)
     var data = response.data;
-    dispatch({type: toolConstants.GETALL_REQUEST,payload: data})
+    if (data == "Token is expired"){
+        localStorage.removeItem("user");
+        history.push('/login');
+    }else{
+        dispatch({type: toolConstants.GETALL_REQUEST,payload: data})
+    }
+  
+}
+export const tokenExpired = () => {
+    localStorage.removeItem("user");
+    this.props.history.push('/login');
 }

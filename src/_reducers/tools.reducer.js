@@ -5,9 +5,7 @@ export const tools = (state = [], action) => {
     switch (action.type) {
         case toolConstants.GETALL_REQUEST:
             return action.payload
-                
-               
-            
+           
         default:
             return state
     }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-//import { userActions } from '../_actions';
+import { userActions } from '../_actions';
 
 import {Header} from '../Header';
 import { ViewTools } from '../ViewTool';
@@ -11,6 +11,10 @@ class HomePage extends React.Component {
        // this.props.getUsers();
     }
 
+    componentWillUnmount(){
+      localStorage.removeItem("user")
+      this.props.history.push('/login')
+    }
     render() {
 
         const { user, users } = this.props;
@@ -34,11 +38,13 @@ function mapState(state) {
     const { user } = authentication;
     return { user, users };
 }
-/* 
+
 const actionCreators = {
     getUsers: userActions.getAll,
-    deleteUser: userActions.delete
-} */
+    deleteUser: userActions.delete,
+    //clearUser: userActions.
+
+}
 
 const connectedHomePage = connect(mapState, null)(HomePage);
 export { connectedHomePage as HomePage };

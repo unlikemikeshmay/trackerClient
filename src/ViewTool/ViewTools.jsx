@@ -14,8 +14,7 @@ const ViewTools = (props) => {
       props.getAll()
        
     }, [])
-console.log("tools")
-console.log(props.tools)
+
 
     return (
         <table className="ui celled inverted selectable table">

@@ -33,8 +33,8 @@ class App extends React.Component {
                         <Router history={history}>
                             <Switch>
                                 <PrivateRoute exact path="/" component={HomePage} />
-                                <Route path="/view-tools" component={LoginPage} />
                                 <Route path="/login" component={LoginPage} />
+                                <Route path="/view-tools" component={LoginPage} />
                                 <Route path="/register" component={RegisterPage} />
                                 <Redirect from="*" to="/" />
                             </Switch>
