@@ -14,16 +14,7 @@ function getAll() {
         'Authorization': `${auth}`
     }}
    response = api.get('/get-tools',conf)
-/*     const requestOptions = {
-        method: 'GET',
 
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `${auth}`
-        }
-    }; */
-    
-    /* return fetch(`${config.apiUrl}/get-tools`, requestOptions).then(handleResponse); */
     return response
 }
 

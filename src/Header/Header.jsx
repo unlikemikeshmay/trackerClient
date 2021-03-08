@@ -1,23 +1,22 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
- const Header = () => {
+ const Header = (props) => {
 
 return (
     <div className="ui secondary pointing menu">
-        <a className="item">
+        <p className="item" onClick={ () => {props.switch("get-tools")}}>
         View tools
-        </a>
-        <a className="item">
-        Lookup
-        </a>
-        <a className="item">
-        View Users
-        </a>
-        <a className="item">
+        </p>
+        <p className="item" onClick={ () => {props.switch("add-tool")}}>
         Add Tool
-        </a>
-        <Link className="item" to="/add-user">Add User</Link>
+        </p>
+        <p className="item" onClick={ () => {props.switch("view-users")}}>
+        View Users
+        </p>
+        <p className="item" onClick={ () => {props.switch("look-up")}}>
+        Look Up
+        </p>
         <div className="right menu">
         <Link className="item" to="/login">Logout</Link>
         </div>

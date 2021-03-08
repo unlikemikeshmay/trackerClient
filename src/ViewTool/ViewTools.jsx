@@ -3,14 +3,16 @@ import {connect} from 'react-redux';
 import _ from 'lodash';
 import { alertActions } from '../_actions';
 import ToolItem from '../ToolItem/ToolItem';
-import { toolActions,getAll } from '../_actions';
+import { toolActions,getAll,clearTools } from '../_actions';
 
 const ViewTools = (props) => {
 
    
     useEffect(() => {
         //this.props.clearAlerts();
-       
+       if(props.tools != undefined){
+           props.clearTools()
+       }
       props.getAll()
        
     }, [])
@@ -46,12 +48,8 @@ const mapStateToProps = (state) => {
 }
 const actionCreators = {
     getAll: getAll,
-    clearAlerts: alertActions.clear
+    clearAlerts: alertActions.clear,
+    clearTools: clearTools
 }
 const connectedViewToolPage = connect(mapStateToProps,actionCreators)(ViewTools)
 export {connectedViewToolPage as ViewTools};
-const renderTools = () => {
-    props.tools.map((item , i) => {
-      return  <ToolItem item={item} key={i} />
-    })
-}

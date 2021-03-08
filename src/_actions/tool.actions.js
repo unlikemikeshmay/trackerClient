@@ -14,8 +14,8 @@ export const getAll = () => async dispatch => {
         'Authorization': `${auth}`
         /* eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2MTUxMzA5MDMsInVzZXIiOiJ0ZXN0QHRlc3QuY29tIn0.ELZfjw4w_TDEo8SF0QxOBgx1FDkkAWNtZDhXloOssM8 */
     }}
-  
-   var response = await api.get('/get-tools',conf)
+   var response = undefined;
+   response = await api.get('/get-tools',conf)
    console.log("response: ");
    console.log(response.data)
     var data = response.data;
@@ -23,6 +23,8 @@ export const getAll = () => async dispatch => {
         localStorage.removeItem("user");
         history.push('/login');
     }else{
+        console.log('data')
+        console.log(data)
         dispatch({type: toolConstants.GETALL_REQUEST,payload: data})
     }
   
@@ -30,4 +32,7 @@ export const getAll = () => async dispatch => {
 export const tokenExpired = () => {
     localStorage.removeItem("user");
     this.props.history.push('/login');
+}
+export const clearTools = () => {
+   return dispatch => {dispatch({type:toolConstants.CLEAR_TOOLS, payload: []})} 
 }

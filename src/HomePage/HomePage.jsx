@@ -1,12 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
-
+import { history } from '../_helpers';
 import { userActions } from '../_actions';
 
 import {Header} from '../Header';
 import { ViewTools } from '../ViewTool';
+import {AddTool} from '../AddTool';
 
 class HomePage extends React.Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      tab: "get-tools"
+    }
+    
+  }
     componentDidMount() {
        // this.props.getUsers();
     }
@@ -15,20 +23,44 @@ class HomePage extends React.Component {
       localStorage.removeItem("user")
       this.props.history.push('/login')
     }
+    setStateCallBack(tab){
+      this.setState({tab})
+    }
+    switchRender(){
+      switch (this.state.tab){
+        case "get-tools":
+          return (
+            localStorage.getItem('user') != null ? <ViewTools/> : this.props.history.push('/login')
+          )
+        case "add-tool":
+          return (
+            <AddTool/>
+          )
+        case "view-users":
+          return (
+            <div>view users</div>
+          )
+        case "look-up":
+            return (
+              <div>look up</div>
+            )
+        default :
+        return (
+          localStorage.getItem('user') != null ? <ViewTools/> : this.props.history.push('/login')
+        )
+      }
+    }
     render() {
 
         const { user, users } = this.props;
         return (
           <div className="ui container">
-            <Header/>
-            <div className="ui segment">
-{localStorage.getItem('user') != null ? <ViewTools/> : this.props.history.push('/login')}
-            
-            </div>
+          <Header switch={this.setStateCallBack.bind(this)}/>
+          <div className="ui segment">
+          {this.switchRender()}
+          
           </div>
-
-
-
+        </div>
         );
     }
 }
