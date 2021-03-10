@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 import { Form } from 'semantic-ui-react'
+import {connect} from 'react-redux';
+import { addTool} from '../_actions';
 
 const options = [
   { key: '1', text: 'test show', value: 'test1' },
@@ -7,7 +9,7 @@ const options = [
   { key: '3', text: 'wow great show', value: 'test3' },
 ]
 
-export const AddTool = () => {
+const AddTool = () => {
 
 const [value,setValue] = useState('')
 const  handleChange = (e, { value }) => setValue({ value })
@@ -33,4 +35,11 @@ const  handleChange = (e, { value }) => setValue({ value })
     )
   
 }
-
+const mapStateToProps = (state) => {
+const {user} = state
+}
+const actionCreators = {
+  addTool: addTool
+}
+const connectedAddTool = connect(mapStateToProps,actionCreators)(AddTool)
+export {connectedAddTool as AddTool};
