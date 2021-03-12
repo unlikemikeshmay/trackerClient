@@ -1,6 +1,6 @@
 import { userConstants } from '../_constants';
 
-export function users(state = {}, action) {
+export const user = (state = {}, action) =>  {
   switch (action.type) {
     case userConstants.CLEAR_USERS:
       return {}
@@ -26,6 +26,10 @@ export function users(state = {}, action) {
             : user
         )
       };
+    case userConstants.SETUSER:
+      return {
+        user: action.payload
+      }
     case userConstants.DELETE_SUCCESS:
       // remove deleted user from state
       return {

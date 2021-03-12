@@ -9,16 +9,38 @@ const options = [
   { key: '3', text: 'wow great show', value: 'test3' },
 ]
 
-const AddTool = () => {
+const AddTool = (props) => {
 
-const [value,setValue] = useState('')
-const  handleChange = (e, { value }) => setValue({ value })
+const [toolname,setToolName] = useState('')
+const [description,setDescription] = useState('')
+const  handleChange = (e) => {
+
+  setToolName(e.target.value)
+  console.log(toolname)
+}
+const handleDescriptionChange = (e) =>{
+
+  setDescription(e.target.value)
+  console.log(description) 
+}
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  var tool = {
+    toolname: toolname,
+    description: description
+  }
+  props.addTool(props.user,tool)
+
+console.log("handle submit fired")
+
+}
 
 
     return (
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <Form.Group widths='equal'>
-          <Form.Input fluid label='Tool Name' placeholder='Tool Name' />
+          <Form.Input fluid label='Tool Name' placeholder='Tool Name' value={toolname} onChange={handleChange}/>
          
           <Form.Select
             fluid
@@ -28,7 +50,7 @@ const  handleChange = (e, { value }) => setValue({ value })
           />
         </Form.Group>
       
-        <Form.TextArea label='About' placeholder='Tool Description...' />
+        <Form.TextArea label='Description' placeholder='Tool Description...' value={description} onChange={handleDescriptionChange}/>
         
         <Form.Button>Submit</Form.Button>
       </Form>

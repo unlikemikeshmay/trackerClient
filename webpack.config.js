@@ -22,8 +22,8 @@ module.exports = {
     externals: {
         // global app config object
         config: JSON.stringify({
-            apiUrl: 'https://safe-sands-61399.herokuapp.com'
-           /*  apiUrl: 'localhost:9001' */
+            /* apiUrl: 'https://safe-sands-61399.herokuapp.com' */
+            apiUrl: 'http://localhost:9001'
         })
     }
 }

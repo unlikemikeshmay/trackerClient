@@ -3,6 +3,8 @@ import { userService } from '../_services';
 import { alertActions } from './';
 import { history } from '../_helpers';
 
+import jwt_decode from "jwt-decode";
+
 export const userActions = {
     login,
     logout,
@@ -19,6 +21,9 @@ function login(username, password) {
             .then(
                 user => { 
                     dispatch(success(user));
+                    console.log("user")
+                    console.log(user)
+                    dispatch(setUser(user))
                     history.push('/');
                 },
                 error => {
@@ -29,7 +34,13 @@ function login(username, password) {
     };
 
     function request(user) { return { type: userConstants.LOGIN_REQUEST, user } }
-    function success(user) { return { type: userConstants.LOGIN_SUCCESS, user } }
+    function success(user) { return { type: userConstants.LOGIN_SUCCESS, payload: user } }
+    function setUser(user) { 
+        var decoded = jwt_decode(user);
+        console.log("decoded");
+        console.log(decoded)
+        return { type:userConstants.SETUSER, payload:decoded.id}
+    }
     function failure(error) { return { type: userConstants.LOGIN_FAILURE, error } }
 }
 function clear(){
