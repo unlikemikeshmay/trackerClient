@@ -26,6 +26,9 @@ class HomePage extends React.Component {
     setStateCallBack(tab){
       this.setState({tab})
     }
+    redirectOnFinish(){
+      this.props.history.push('/')
+    }
     switchRender(){
       switch (this.state.tab){
         case "get-tools":
@@ -34,7 +37,7 @@ class HomePage extends React.Component {
           )
         case "add-tool":
           return (
-            <AddTool/>
+            <AddTool redirect={this.redirectOnFinish.bind(this)}/>
           )
         case "view-users":
           return (

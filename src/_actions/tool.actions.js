@@ -36,14 +36,25 @@ export const tokenExpired = () => {
 export const clearTools = () => {
    return dispatch => {dispatch({type:toolConstants.CLEAR_TOOLS, payload: []})} 
 }
-export const addTool = (id, tool) =>  async dispatch => {
+export const addTool = (tool) =>  async dispatch => {
     var auth = JSON.parse(localStorage.getItem('user'));
     var conf = { headers: {
         'Content-Type': 'application/json',
         'Authorization': `${auth}`
         /* eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2MTUxMzA5MDMsInVzZXIiOiJ0ZXN0QHRlc3QuY29tIn0.ELZfjw4w_TDEo8SF0QxOBgx1FDkkAWNtZDhXloOssM8 */
     }}
+    console.log("tool inside action")
+    console.log(tool)
     var response = undefined;
-    response = await api.post('/inventory'{id:id,tool:tool},conf)
+    response = await api.post('/inventory',{
+        uid:tool.uid,
+        toolname:tool.toolname,
+        description:tool.description,
+        showname:tool.showname,
+        lastusersignout:tool.lastusersignout,
+        currentuserid:tool.currentuserid,
+        signouttime:tool.signouttime
+    },conf)
+    
     dispatch({type:toolConstants.ADD_TOOL,payload:response.data})
 }

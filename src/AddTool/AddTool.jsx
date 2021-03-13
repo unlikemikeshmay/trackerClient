@@ -4,15 +4,16 @@ import {connect} from 'react-redux';
 import { addTool} from '../_actions';
 
 const options = [
-  { key: '1', text: 'test show', value: 'test1' },
-  { key: '2', text: 'amazing great show', value: 'test2' },
-  { key: '3', text: 'wow great show', value: 'test3' },
+  { key: '1', text: 'Test Show', value: 'test' },
+  { key: '2', text: 'Amazing Great Show', value: 'amazing great show' },
+  { key: '3', text: 'Wow great show', value: 'wow great show' },
 ]
 
 const AddTool = (props) => {
 
-const [toolname,setToolName] = useState('')
-const [description,setDescription] = useState('')
+const [toolname,setToolName] = useState('');
+const [description,setDescription] = useState('');
+const [showname, setShowname] = useState('')
 const  handleChange = (e) => {
 
   setToolName(e.target.value)
@@ -23,16 +24,27 @@ const handleDescriptionChange = (e) =>{
   setDescription(e.target.value)
   console.log(description) 
 }
-
+const handleSelect = (e,{value}) => {
+  
+  setShowname(value)
+  console.log(showname)
+}
 const handleSubmit = (e) => {
   e.preventDefault();
-  var tool = {
-    toolname: toolname,
-    description: description
-  }
-  props.addTool(props.user,tool)
 
-console.log("handle submit fired")
+  var tool = {
+    "uid":null,
+    "toolname":toolname,
+	  "description":description,
+	  "showname":showname,
+	  "lastusersignout":null,
+	  "currentuserid":null,
+	  "signouttime":null
+  }
+
+  props.addTool(tool)
+
+props.redirect()
 
 }
 
@@ -43,11 +55,13 @@ console.log("handle submit fired")
           <Form.Input fluid label='Tool Name' placeholder='Tool Name' value={toolname} onChange={handleChange}/>
          
           <Form.Select
+            onChange={handleSelect}
             fluid
             label='Show'
             options={options}
             placeholder='Show'
           />
+          {showname}
         </Form.Group>
       
         <Form.TextArea label='Description' placeholder='Tool Description...' value={description} onChange={handleDescriptionChange}/>
@@ -58,7 +72,9 @@ console.log("handle submit fired")
   
 }
 const mapStateToProps = (state) => {
-const {user} = state
+return {
+  user: state.user
+}
 }
 const actionCreators = {
   addTool: addTool
