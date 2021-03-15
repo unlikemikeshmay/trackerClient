@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {connect} from 'react-redux';
 import _ from 'lodash';
-import { alertActions } from '../_actions';
 import ToolItem from '../ToolItem/ToolItem';
-import { toolActions,getAll,clearTools } from '../_actions';
+import { alertActions,getAll,clearTools,updateTool,deleteTool } from '../_actions';
 import { Button, Icon, Modal,Form } from 'semantic-ui-react'
+import SimpleModal from '../Modals/SimpleModal';
 
 
 const options = [
@@ -13,26 +13,65 @@ const options = [
     { key: '3', text: 'Wow great show', value: 'wow great show' },
   ]
 const ViewTools = (props) => {
+const [currentTool,setCurrentTool] = useState({})
 const [editModalOpen, setEditModalOpen] = useState(false);
 const [firstOpen, setFirstOpen] = React.useState(false)
+const [deleteOpen,setDeleteOpen] = useState('');
 const [secondOpen, setSecondOpen] = React.useState(false)
+const [toolname,setToolName] = useState('');
+const [description,setDescription] = useState('');
+const [showname, setShowname] = useState('')
     useEffect(() => {
         //this.props.clearAlerts();
        if(props.tools != undefined){
            props.clearTools()
        }
+       /* return ()=>{
+         setCurrentTool({})
+       } */
       props.getAll()
        
-    }, [])
+    }, [currentTool])
+    const  handleChange = (e) => {
 
+      setToolName(e.target.value)
+      console.log(toolname)
+    }
+    const handleDescriptionChange = (e) =>{
+    
+      setDescription(e.target.value)
+      console.log(description) 
+    }
+    const handleSelect = (e,{value}) => {
+      
+      setShowname(value)
+      console.log(showname)
+    }
+    const handleSubmit = (e) => {
+      e.preventDefault();
+    
+      var tool = {
+        "uid":currentTool.uid,
+        "toolname":toolname,
+        "description":description,
+        "showname":showname,
+        "lastusersignout":null,
+        "currentuserid":null,
+        "signouttime":null
+      }
+      props.updateTool(tool)
+    }
+const handleTool = (val) => {
+  setCurrentTool(val)
+}
 const openEditModal = (val) => {
     setEditModalOpen(val)
+   
 }
     return (
         <div>
              <>
-     
-
+             <SimpleModal />
       <Modal
         onClose={() => setFirstOpen(false)}
         onOpen={() => setFirstOpen(true)}
@@ -61,23 +100,23 @@ const openEditModal = (val) => {
           open={secondOpen}
           size='small'
         >
-          <Modal.Header>Edit Record []</Modal.Header>
+          <Modal.Header>Edit Record <h1>{currentTool.toolname}</h1></Modal.Header>
           <Modal.Content>
-          <Form >
+          <Form onSubmit={handleSubmit}>
         <Form.Group widths='equal'>
-          <Form.Input fluid label='Tool Name' placeholder='Tool Name' />
+          <Form.Input fluid label='Tool Name' placeholder={currentTool.toolname} value={toolname} onChange={handleChange}/>
          
           <Form.Select
-           
+           onChange={handleSelect}
             fluid
             label='Show'
             options={options}
-            placeholder='Show'
+            placeholder={currentTool.showname}
           />
          
         </Form.Group>
       
-        <Form.TextArea label='Description' placeholder='Tool Description...' />
+        <Form.TextArea label='Description' placeholder={currentTool.description} value={description} onChange={handleDescriptionChange}/>
         
         <Form.Button>Submit</Form.Button>
       </Form>
@@ -94,6 +133,7 @@ const openEditModal = (val) => {
               onClick={() =>{ 
                   setSecondOpen(false)
                   setEditModalOpen(false)
+                  setCurrentTool({})
                 }}
             />
           </Modal.Actions>
@@ -117,7 +157,7 @@ const openEditModal = (val) => {
                 <tbody className="">
               
                 {props.tools != undefined ? props.tools.map((item,index) => (
-                    <ToolItem editModal={editModalOpen} setEditModal={openEditModal} item={item} key={index}/>
+                    <ToolItem deleteTool={deleteTool}  setTool={handleTool}  editModal={editModalOpen} setEditModal={openEditModal} item={item} key={index}/>
                 )): ""}
                     
                 </tbody>
@@ -134,7 +174,9 @@ const mapStateToProps = (state) => {
 const actionCreators = {
     getAll: getAll,
     clearAlerts: alertActions.clear,
-    clearTools: clearTools
+    clearTools: clearTools,
+    updateTool: updateTool,
+    deleteTool:deleteTool
 }
 const connectedViewToolPage = connect(mapStateToProps,actionCreators)(ViewTools)
 export {connectedViewToolPage as ViewTools};

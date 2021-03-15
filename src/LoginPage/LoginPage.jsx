@@ -70,6 +70,7 @@ class LoginPage extends React.Component {
       </div>
 
     </form>
+    {/* {submitted && !username ? <img src={nedry} alt="loading..." />:null} */}
         </div>
     </div>
 </div>

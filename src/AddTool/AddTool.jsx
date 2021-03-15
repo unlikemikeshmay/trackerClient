@@ -53,7 +53,7 @@ props.redirect()
       <Form onSubmit={handleSubmit}>
         <Form.Group widths='equal'>
           <Form.Input fluid label='Tool Name' placeholder='Tool Name' value={toolname} onChange={handleChange}/>
-         
+        
           <Form.Select
             onChange={handleSelect}
             fluid
@@ -61,7 +61,7 @@ props.redirect()
             options={options}
             placeholder='Show'
           />
-          {showname}
+   
         </Form.Group>
       
         <Form.TextArea label='Description' placeholder='Tool Description...' value={description} onChange={handleDescriptionChange}/>

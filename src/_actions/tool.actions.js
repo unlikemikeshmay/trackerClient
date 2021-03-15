@@ -16,7 +16,29 @@ export const getAll = () => async dispatch => {
     }}
    var response = undefined;
    response = await api.get('/get-tools',conf)
-   console.log("response: ");
+
+    var data = response.data;
+    if (data == "Token is expired"){
+        localStorage.removeItem("user");
+        history.push('/login');
+    }else{
+        dispatch({type: toolConstants.GETALL_REQUEST,payload: data})
+    }
+  
+}
+export const deleteTool = (uid) => async dispatch => {
+  
+
+    var auth = JSON.parse(localStorage.getItem('user'));
+    var conf = { headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `${auth}`
+        /* eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2MTUxMzA5MDMsInVzZXIiOiJ0ZXN0QHRlc3QuY29tIn0.ELZfjw4w_TDEo8SF0QxOBgx1FDkkAWNtZDhXloOssM8 */
+    }
+}
+   var response = undefined;
+   response = await api.delete(`/inventory/?uid=${uid}`,conf)
+   console.log("response for delete: ");
    console.log(response.data)
     var data = response.data;
     if (data == "Token is expired"){
@@ -27,6 +49,27 @@ export const getAll = () => async dispatch => {
         console.log(data)
         dispatch({type: toolConstants.GETALL_REQUEST,payload: data})
     }
+  
+}
+export const updateTool = (tool) => async dispatch => {
+  
+
+    var auth = JSON.parse(localStorage.getItem('user'));
+    var conf = { headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `${auth}`
+        /* eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2MTUxMzA5MDMsInVzZXIiOiJ0ZXN0QHRlc3QuY29tIn0.ELZfjw4w_TDEo8SF0QxOBgx1FDkkAWNtZDhXloOssM8 */
+    }}
+   var response = undefined;
+    response = await api.put('/inventory',{
+        uid:tool.uid,
+        toolname:tool.toolname,
+        description:tool.description,
+        showname:tool.showname,
+        lastusersignout:tool.lastusersignout,
+        currentuserid:tool.currentuserid,
+        signouttime:tool.signouttime
+    },conf)
   
 }
 export const tokenExpired = () => {
