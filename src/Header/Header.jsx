@@ -17,6 +17,7 @@ return (
         <p className="item" onClick={ () => {props.switch("look-up")}}>
         Look Up
         </p>
+
         <div className="right menu">
         <Link className="item" to="/login">Logout</Link>
         </div>

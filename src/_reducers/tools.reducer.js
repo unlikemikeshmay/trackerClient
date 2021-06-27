@@ -5,6 +5,8 @@ export const tools = (state = [], action) => {
     switch (action.type) {
         case toolConstants.GETALL_REQUEST:
             return action.payload
+        case toolConstants.DELETE_TOOL:
+            return action.payload
         case toolConstants.CLEAR_TOOLS:
             return action.payload
         default:

@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import { Form } from 'semantic-ui-react'
 import {connect} from 'react-redux';
 import { addTool} from '../_actions';
+import { history } from '../_helpers';
 
 const options = [
   { key: '1', text: 'Test Show', value: 'test' },
@@ -43,8 +44,9 @@ const handleSubmit = (e) => {
   }
 
   props.addTool(tool)
+   window.location = "/";
 
-props.redirect()
+
 
 }
 

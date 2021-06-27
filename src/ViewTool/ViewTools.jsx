@@ -4,8 +4,9 @@ import _ from 'lodash';
 import ToolItem from '../ToolItem/ToolItem';
 import { alertActions,getAll,clearTools,updateTool,deleteTool } from '../_actions';
 import { Button, Icon, Modal,Form } from 'semantic-ui-react'
-import SimpleModal from '../Modals/SimpleModal';
-
+import api from "../_services/api";
+import {history} from "../_helpers";
+import {toolConstants} from "../_constants";
 
 const options = [
     { key: '1', text: 'Test Show', value: 'test' },
@@ -13,29 +14,63 @@ const options = [
     { key: '3', text: 'Wow great show', value: 'wow great show' },
   ]
 const ViewTools = (props) => {
-const [currentTool,setCurrentTool] = useState({})
+const [currentTool,setCurrentTool] = useState([])
 const [editModalOpen, setEditModalOpen] = useState(false);
+const [actionModalOpen,setActionModalOpen] = useState(false);
 const [firstOpen, setFirstOpen] = React.useState(false)
-const [deleteOpen,setDeleteOpen] = useState('');
+const [deleteOpen,setDeleteOpen] = React.useState(false);
 const [secondOpen, setSecondOpen] = React.useState(false)
 const [toolname,setToolName] = useState('');
 const [description,setDescription] = useState('');
 const [showname, setShowname] = useState('')
+const [toggle,setToggle] = useState(false)
+
     useEffect(() => {
-        //this.props.clearAlerts();
+
+        //why am i clearing this?
        if(props.tools != undefined){
            props.clearTools()
        }
-       /* return ()=>{
-         setCurrentTool({})
-       } */
+
+       retrieveTools()
       props.getAll()
-       
-    }, [currentTool])
+
+    }, [])
+
+    const retrieveTools = async () => {
+        var auth = JSON.parse(localStorage.getItem('user'));
+        var conf = { headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `${auth}`
+                /* eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhdXRob3JpemVkIjp0cnVlLCJleHAiOjE2MTUxMzA5MDMsInVzZXIiOiJ0ZXN0QHRlc3QuY29tIn0.ELZfjw4w_TDEo8SF0QxOBgx1FDkkAWNtZDhXloOssM8 */
+            }}
+        let response = undefined;
+        response = await api.get('/get-tools',conf).then(
+            res => {
+               response  = res.data;
+               console.log
+                setCurrentTool(res.data)
+
+            }
+        )
+        if (response == "Token is expired"){
+            localStorage.removeItem("user");
+            history.push('/login');
+        }
+
+    }
+    const toggleState = () => {
+    setToggle(!toggle)
+        console.log("toggle: ",toggle)
+        window.location = '/'
+    }
     const  handleChange = (e) => {
 
       setToolName(e.target.value)
       console.log(toolname)
+    }
+    const update = () => {
+    props.getAll()
     }
     const handleDescriptionChange = (e) =>{
     
@@ -49,9 +84,14 @@ const [showname, setShowname] = useState('')
     }
     const handleSubmit = (e) => {
       e.preventDefault();
-    
+      let id;
+      if(currentTool == null){
+          id = ""
+      }else{
+          id = currentTool.uid
+      }
       var tool = {
-        "uid":currentTool.uid,
+        "uid":id,
         "toolname":toolname,
         "description":description,
         "showname":showname,
@@ -64,14 +104,18 @@ const [showname, setShowname] = useState('')
 const handleTool = (val) => {
   setCurrentTool(val)
 }
+
 const openEditModal = (val) => {
     setEditModalOpen(val)
    
 }
+
     return (
-        <div>
+
+        currentTool ?
+            <div>
              <>
-             <SimpleModal />
+
       <Modal
         onClose={() => setFirstOpen(false)}
         onOpen={() => setFirstOpen(true)}
@@ -80,18 +124,21 @@ const openEditModal = (val) => {
         <Modal.Header>Edit Record?</Modal.Header>
         <Modal.Content image>
           <div className='image'>
-            <Icon name='right arrow' />
+            <Icon name='edit' />
           </div>
           <Modal.Description>
-            <p>Are you sure you want to edit record?</p>
+            <p>You may edit existing, or delete record.</p><p><span style={{color:'red'}}><h3>*Warning* </h3></span></p><p> All Changes are final.</p>
           </Modal.Description>
         </Modal.Content>
         <Modal.Actions>
         <Button onClick={() => setEditModalOpen(false)} >
             Cancel <Icon name='ban' />
           </Button>
-          <Button onClick={() => setSecondOpen(true)} primary>
-            Proceed <Icon name='right chevron'/>
+        <Button onClick={() => setSecondOpen(true)} primary>
+            Edit Record  <Icon name='right chevron'/>
+        </Button>
+          <Button onClick={() => setDeleteOpen(true)} negative>
+            Delete Record  <Icon name='trash'/>
           </Button>
         </Modal.Actions>
 
@@ -105,7 +152,7 @@ const openEditModal = (val) => {
           <Form onSubmit={handleSubmit}>
         <Form.Group widths='equal'>
           <Form.Input fluid label='Tool Name' placeholder={currentTool.toolname} value={toolname} onChange={handleChange}/>
-         
+
           <Form.Select
            onChange={handleSelect}
             fluid
@@ -140,8 +187,9 @@ const openEditModal = (val) => {
         </Modal>
       </Modal>
     </>
-            <table className="ui celled inverted selectable table">
-            <thead className="">
+
+            <table  className="ui  celled table">
+                <thead className="">
                 <tr className="">
                     <th className="">Id</th>
                     <th className="">Tool Name</th>
@@ -152,16 +200,24 @@ const openEditModal = (val) => {
                     <th className="">Current User</th>
                     <th className="">Current User Sign out</th>
                     <th>Actions</th>
-                    
+
                 </tr></thead>
-                <tbody className="">
-              
-                {props.tools != undefined ? props.tools.map((item,index) => (
-                    <ToolItem deleteTool={deleteTool}  setTool={handleTool}  editModal={editModalOpen} setEditModal={openEditModal} item={item} key={index}/>
+                <tbody style={{overflowX:'scroll',overflowY:'scroll'}} className="">
+
+                {currentTool != null ? currentTool.map((item,index) => (
+                    <ToolItem  deleteTool={props.deleteTool}  setTool={handleTool}  editModal={editModalOpen} toggle={toggleState} setEditModal={openEditModal} item={item} key={index} setDeleteOpen={setDeleteOpen} deleteOpen={deleteOpen}/>
                 )): ""}
-                    
+
                 </tbody>
             </table>
+
+
+        </div> : <div  className="ui placeholder segment">
+            <div className="ui icon header">
+                <i className="icon"></i>
+                No tools have been added yet
+            </div>
+            <div className="ui secondary button" onClick={() => props.switch("add-tool")}>Add Tool</div>
         </div>
         
      

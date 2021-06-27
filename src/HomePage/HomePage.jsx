@@ -6,6 +6,7 @@ import { userActions } from '../_actions';
 import {Header} from '../Header';
 import { ViewTools } from '../ViewTool';
 import {AddTool} from '../AddTool';
+import {UserPage} from '../UserPage';
 
 class HomePage extends React.Component {
   constructor(props){
@@ -29,19 +30,21 @@ class HomePage extends React.Component {
     redirectOnFinish(){
       this.props.history.push('/')
     }
+
     switchRender(){
       switch (this.state.tab){
         case "get-tools":
           return (
-            localStorage.getItem('user') != null ? <ViewTools/> : this.props.history.push('/login')
+            localStorage.getItem('user') != null ? <ViewTools switch={this.setStateCallBack.bind(this)}/> : this.props.history.push('/login')
           )
+
         case "add-tool":
           return (
             <AddTool redirect={this.redirectOnFinish.bind(this)}/>
           )
         case "view-users":
           return (
-            <div>view users</div>
+           <UserPage />
           )
         case "look-up":
             return (
@@ -49,17 +52,17 @@ class HomePage extends React.Component {
             )
         default :
         return (
-          localStorage.getItem('user') != null ? <ViewTools/> : this.props.history.push('/login')
+          localStorage.getItem('user') != null ? <ViewTools switch={this.setStateCallBack.bind(this)}/> : this.props.history.push('/login')
         )
       }
     }
-    render() {
 
+    render() {
         const { user, users } = this.props;
         return (
-          <div className="ui container">
+          <div style={{width:'100vw'}} className="ui container">
           <Header switch={this.setStateCallBack.bind(this)}/>
-          <div className="ui segment">
+          <div >
           {this.switchRender()}
           
           </div>

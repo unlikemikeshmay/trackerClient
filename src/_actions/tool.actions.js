@@ -37,7 +37,7 @@ export const deleteTool = (uid) => async dispatch => {
     }
 }
    var response = undefined;
-   response = await api.delete(`/inventory/?uid=${uid}`,conf)
+   response = await api.delete(`/inventory/${uid}`,conf)
    console.log("response for delete: ");
    console.log(response.data)
     var data = response.data;
@@ -47,7 +47,7 @@ export const deleteTool = (uid) => async dispatch => {
     }else{
         console.log('data')
         console.log(data)
-        dispatch({type: toolConstants.GETALL_REQUEST,payload: data})
+        dispatch({type: toolConstants.DELETE_TOOL,payload: data})
     }
   
 }

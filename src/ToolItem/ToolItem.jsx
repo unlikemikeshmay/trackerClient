@@ -1,57 +1,13 @@
 import React,{useState} from 'react';
-import { Dropdown, Menu,Modal,Header,Icon,Button } from 'semantic-ui-react';
+import {Modal,Header,Icon,Button } from 'semantic-ui-react';
 
 const ToolItem = (props) => {
 const [selection, setSelection] = useState('');
 const [open, setOpen] = React.useState(false)
-const executeAction = (e , {value}) => {
 
-    switch (value){
-        case "edit":
-            //todo: pop up modal for edit, then call redux action for update
-            console.log("edit called");
-            props.setTool(props.item)
-           props.setEditModal(!props.editModal)
-           
-            break;
-        case "delete":
-            //todo pop up modal asking for permission to delete, redux action on confirm
-            console.log("delete called");
-            setOpen(true)
-            setSelection("")
-            break;
-        case "reminder":
-            //pop up modal with reminder email options then redux send
-            console.log("reminder called")
-
-            setSelection("")
-            break;
-        default:
-            break;
-    }
-}
-
-const actionOption = [
-    {
-        key:"edit",
-        text:"Edit",
-        value:"edit"
-        // add wrench image for edit
-    },
-    {
-        key:"delete",
-        text:"Delete",
-        value:"delete"
-    },
-    {
-        key:"reminder",
-        text:"Send Reminder",
-        value:"reminder"
-    }
-]
 return (
 <tr className="">
-    <td className="">{props.item.uid}</td>
+    <td className="">{props.item.uid ? props.item.uid : ''}</td>
     <td className="">{props.item.toolname}</td>
     <td className="">{props.item.description}</td>
     <td className="">{props.item.showname}</td>
@@ -59,22 +15,28 @@ return (
     <td className="">{props.item.signouttime}</td>
     <td className="">{props.item.currentuserid}</td>
     <td className="">{props.item.lastusersignout}</td>
+
     <td>
     
-    <Menu compact>
-    <Dropdown options={actionOption} value={selection} simple item onChange={executeAction }/>
-  </Menu>
+
+        <button className="ui button" onClick={() => {
+            props.setEditModal(!props.editModal)
+            setOpen(!open)
+        } }>
+            <i className="bars icon"></i>
+        </button>
+
   <Modal
       basic
       onClose={() => setOpen(false)}
       onOpen={() => setOpen(true)}
-      open={open}
+      open={props.deleteOpen}
       size='small'
       
     >
       <Header icon>
         <Icon name='trash' />
-        Delete Record <h1>{props.item.toolname}</h1>
+        Delete Record <h1>{props.item.toolname ? props.item.toolname : ''}</h1>
       </Header>
       <Modal.Content>
         <p>
@@ -82,13 +44,20 @@ return (
         </p>
       </Modal.Content>
       <Modal.Actions>
-        <Button basic color='red' inverted onClick={() => setOpen(false)}>
+        <Button basic color='red' inverted onClick={
+            () => {
+                props.setDeleteOpen(!props.deleteOpen)
+                setOpen(false)
+            }
+        }>
           <Icon name='remove' /> No
         </Button>
         <Button color='green' inverted onClick={() => {
             console.log("fired delete tool")
             props.deleteTool(props.item.uid)
-            setOpen(false)
+            props.setDeleteOpen(!props.deleteOpen)
+            props.setEditModal(false)
+            props.toggle()
         }
     }>
           <Icon name='checkmark' /> Yes
