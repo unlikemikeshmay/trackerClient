@@ -4,13 +4,13 @@ export const UserRecord = (props) => {
 
     return (
         <tr>
-            <td>k</td>
-            <td>d</td>
-            <td>d</td>
-            <td>d</td>
-            <td>d</td>
-            <td>d</td>
-            <td>s</td>
+            <td>{props.item.id}</td>
+            <td>{props.item.phone}</td>
+            <td>{props.item.email}</td>
+            <td>{props.item.show}</td>
+            <td>{props.item.firstname}</td>
+            <td>{props.item.lastname}</td>
+            <td>{props.item.department}</td>
         </tr>
     )
 }

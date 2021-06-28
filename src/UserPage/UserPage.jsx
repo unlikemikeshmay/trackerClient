@@ -1,14 +1,15 @@
 import React,{useState,useEffect} from 'react';
 import api from "../_services/api"
 import {UserRecord} from "../UserRecord";
+import ToolItem from "../ToolItem/ToolItem";
 
 
 
-export const UserPage = (props) => {
+export const UserPage = () => {
     const [userList,setUserList] = useState([])
     useEffect(
         () => {
-            setUserList(retrieveUsers())
+            retrieveUsers()
         },[]
     )
     const retrieveUsers = async () => {
@@ -20,8 +21,9 @@ export const UserPage = (props) => {
         await api.get('users',conf)
             .then(
                 res => {
+                    console.log("res.data is what is getting assigned to userList: ")
                     console.log(res.data)
-                    return res.data;
+                    setUserList(res.data);
                 }
 
             )
@@ -34,15 +36,16 @@ export const UserPage = (props) => {
                     <th className="">User Id</th>
                     <th className="">Phone</th>
                     <th className="">Email</th>
-                    <th className="">Show Name</th>
-                    <th className="">Last User</th>
+                    <th className="">Show</th>
+                    <th className="">First Name</th>
+                    <th className="">Last Name</th>
                     <th className="">Department</th>
                 </tr>
                 </thead>
                 <tbody style={{overflowX:'scroll',overflowY:'scroll'}} className="">
                 {userList != null ? userList.map((item,index) => (
-                    <UserRecord/>
-                )) : ""}
+                    <UserRecord  item={item} key={index}/>
+                )): ""}
                 </tbody>
             </table>
         </div>
