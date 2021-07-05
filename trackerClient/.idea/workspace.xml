@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="25ca3ca1-cd4a-4dc0-8f16-d11b62dc297f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.babelrc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/asset-manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/favicon.ico" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/logo192.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/logo512.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/robots.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/static/css/2.2291bbb0.chunk.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/static/css/2.2291bbb0.chunk.css.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/static/js/2.ed2074cd.chunk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/static/js/2.ed2074cd.chunk.js.LICENSE.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/static/js/2.ed2074cd.chunk.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/static/js/main.cbbc29f9.chunk.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/static/js/main.cbbc29f9.chunk.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/static/js/runtime-main.7389a8a3.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/static/js/runtime-main.7389a8a3.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/static/media/brand-icons.278156e4.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/static/media/brand-icons.65a2fb6d.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/static/media/brand-icons.6729d297.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/static/media/brand-icons.cac87dc0.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/static/media/brand-icons.d68fa3e6.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/static/media/flags.99f63ae7.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/static/media/icons.38c6d8ba.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/static/media/icons.425399f8.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/static/media/icons.62d9dae4.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/static/media/icons.a01e3f2d.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/static/media/icons.c656b8ca.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/static/media/outline-icons.53671035.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/static/media/outline-icons.687a4990.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/static/media/outline-icons.752905fa.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/static/media/outline-icons.9c4845b4.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../build/static/media/outline-icons.ddae9b1b.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dist/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../dist/main.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/AddTool/AddTool.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/AddTool/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/App/App.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/App/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Header/Header.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Header/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/HomePage/HomePage.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/HomePage/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/LoginPage/LoginPage.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/LoginPage/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/Modals/SimpleModal.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/RegisterPage/RegisterPage.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/RegisterPage/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/ToolItem/ToolItem.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/ToolItem/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/UserPage/UserPage.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/UserPage/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/UserRecord/UserRecord.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/UserRecord/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/ViewTool/ViewTools.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/ViewTool/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/_actions/alert.actions.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/_actions/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/_actions/tool.actions.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/_actions/user.actions.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/_components/PrivateRoute.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/_components/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/_constants/alert.constants.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/_constants/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/_constants/tool.constants.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/_constants/user.constants.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/_helpers/auth-header.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/_helpers/fake-backend.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/_helpers/history.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/_helpers/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/_helpers/store.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/_reducers/alert.reducer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/_reducers/authentication.reducer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/_reducers/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/_reducers/registration.reducer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/_reducers/tools.reducer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/_reducers/users.reducer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/_services/api.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/_services/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/_services/tool.service.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/_services/user.service.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/assets/tenor.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../src/index.jsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../webpack.config.js" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="GOROOT" url="file:///snap/go/7736" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1uuSjbul3jkKhQHtg5yavz66WTn" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="go.import.settings.migrated" value="true" />
+    <property name="go.sdk.automatically.set" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RunManager">
+    <configuration name="start" type="js.build_tools.npm" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="start" />
+      </scripts>
+      <node-interpreter value="project" />
+      <package-manager value="/snap/node/4891/lib/node_modules/npm" />
+      <envs />
+      <method v="2">
+        <option name="NpmBeforeRunTask" enabled="true">
+          <package-json value="$PROJECT_DIR$/package.json" />
+          <command value="build" />
+          <node-interpreter value="project" />
+          <package-manager value="/snap/node/4891/lib/node_modules/npm" />
+          <envs />
+        </option>
+        <option name="NpmBeforeRunTask" enabled="true">
+          <package-json value="$PROJECT_DIR$/package.json" />
+          <command value="run" />
+          <scripts>
+            <script value="start" />
+          </scripts>
+          <node-interpreter value="project" />
+          <package-manager value="/snap/node/4891/lib/node_modules/npm" />
+          <envs />
+        </option>
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+</project>
