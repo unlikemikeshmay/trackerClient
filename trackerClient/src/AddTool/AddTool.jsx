@@ -1,9 +1,8 @@
 import React, {useState} from 'react'
-import { Form } from 'semantic-ui-react'
 import {connect} from 'react-redux';
 import { addTool} from '../_actions';
-import { history } from '../_helpers';
 
+//#TODO Must populate with list from database
 const options = [
   { key: '1', text: 'Test Show', value: 'test' },
   { key: '2', text: 'Amazing Great Show', value: 'amazing great show' },
@@ -15,6 +14,9 @@ const AddTool = (props) => {
 const [toolname,setToolName] = useState('');
 const [description,setDescription] = useState('');
 const [showname, setShowname] = useState('')
+const [toolNameError,setToolNameError] = useState('')
+const [descriptionError,setDescriptionError] = useState('')
+const [showNameError,setShowNameError] = useState('')
 const  handleChange = (e) => {
 
   setToolName(e.target.value)
@@ -32,7 +34,18 @@ const handleSelect = (e,{value}) => {
 }
 const handleSubmit = (e) => {
   e.preventDefault();
+  //form validation for adding tools and filling error fields
+if(showname.length == 0 || description.length == 0 || toolname.length == 0){
+    toolname.length == 0 ? setToolNameError("* Must Enter a tool name") :  setToolNameError("")
+    showname.length == 0 ? setShowNameError("* Must Select a show name") : setShowNameError("")
+    description.length == 0 ? setDescriptionError("* Must Enter a description") : setDescriptionError("")
+    console.log("fuck this i'm out!")
+    return;
+    }
 
+
+console.log("showname")
+console.log(showname)
   var tool = {
     "uid":null,
     "toolname":toolname,
@@ -49,27 +62,43 @@ const handleSubmit = (e) => {
 
 
 }
-
-
+const formStyle = {
+    margin:"1em",
+}
+const errorStyle = {
+    color:'red'
+}
     return (
-      <Form onSubmit={handleSubmit}>
-        <Form.Group widths='equal'>
-          <Form.Input fluid label='Tool Name' placeholder='Tool Name' value={toolname} onChange={handleChange}/>
-        
-          <Form.Select
-            onChange={handleSelect}
-            fluid
-            label='Show'
-            options={options}
-            placeholder='Show'
-          />
-   
-        </Form.Group>
-      
-        <Form.TextArea label='Description' placeholder='Tool Description...' value={description} onChange={handleDescriptionChange}/>
-        
-        <Form.Button>Submit</Form.Button>
-      </Form>
+        <div className="ui container">
+           <div className="ui form">
+               <h4 className="ui dividing header">Add Tool to database:</h4>
+               <div className="fields">
+                   <div className="field">
+                       <label>Tool name</label>
+                       <input type="text" placeholder='Tool Name' value={toolname} onChange={handleChange}/>
+                       {toolNameError != '' ? <span style={errorStyle}>{toolNameError}</span> : toolNameError}
+                   </div>
+                   <div className="field">
+                        <label>Show</label>
+                        <select  onChange={e => {
+                            console.log(e.target.value)
+                            setShowname(e.target.value)}} >
+                            <option value="" disabled selected>Select your option</option>
+                            {options.length != 0 ? options.map((item,index) => {
+                               return  <option key={item.index} value={item.value}>{item.text}</option>
+                            }) : <option value="no options">No options</option>}
+                        </select>
+                       {showNameError != '' ? <span style={errorStyle}>{showNameError}</span> : showNameError}
+                   </div>
+               </div>
+               <div className="field">
+                   <label>Description</label>
+                   <textarea className="fluid" rows="2" placeholder='Tool Description...' value={description} onChange={handleDescriptionChange}></textarea>
+                   {descriptionError != '' ? <span style={errorStyle}>{descriptionError}</span> : descriptionError}
+               </div>
+               <button onClick={handleSubmit}>Add Tool</button>
+           </div>
+        </div>
     )
   
 }
