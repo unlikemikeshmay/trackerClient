@@ -1,12 +1,17 @@
 import React,{useState,useEffect} from 'react';
 import api from "../_services/api"
 import {UserRecord} from "../UserRecord";
+import {ShowsPage} from "../ShowsPage";
 import ToolItem from "../ToolItem/ToolItem";
 
 
 
 export const UserPage = () => {
     const [userList,setUserList] = useState([])
+    const [userTabActive, setUsersTabActive] = useState(true)
+    const [showTabActive, setShowTabActive] = useState(false)
+    const [lookupTab,setLookupTabActive] = useState(false)
+    const [currentTab, setCurrentTab] = useState(["users"])
     useEffect(
         () => {
             retrieveUsers()
@@ -23,31 +28,13 @@ export const UserPage = () => {
                 res => {
                     console.log("res.data is what is getting assigned to userList: ")
                     console.log(res.data)
-                    setUserList(res.data);
+                    setUserList(res.data)
                 }
 
             )
     }
-    return (
-        <div>
-            <div className="ui pointing menu">
-                <a className="active item">
-                    Users
-                </a>
-                <a className="item">
-                    Shows
-                </a>
-                <a className="item">
-                    Look-Up
-                </a>
-                <div className="right menu">
-                    <div className="item">
-                        <div className="ui transparent icon input">
-
-                        </div>
-                    </div>
-                </div>
-            </div>
+    const renderUserTab = () => {
+        return (
             <div className="ui segment">
                 <div>
                     <table  className="ui  celled table">
@@ -70,8 +57,60 @@ export const UserPage = () => {
                     </table>
                 </div>
             </div>
+        )
+    }
+    const switchTabs = () => {
+        switch(currentTab){
+            case "users":
+                return renderUserTab();
+            case "shows":
+                return <ShowsPage/>
+            default:
+                return null;
+
+
+        }
+    }
+    return (
+        <div>
+            <div className="ui pointing menu">
+                <p className={userTabActive == true ? "active item" : "item"}  onClick={() => {
+                    console.log("setting current tab to users")
+                    if(!userTabActive){
+                        setUsersTabActive(true)
+                        setLookupTabActive(false)
+                        setShowTabActive(false)
+                    }
+                    setCurrentTab("users")}
+                }>Users</p>
+                <p className={showTabActive == true ? "active item" : "item"} onClick={() => {
+                    if(!showTabActive){
+                        setShowTabActive(true)
+                        setLookupTabActive(false)
+                        setUsersTabActive(false)
+                    }
+                    setCurrentTab("shows")
+                }
+                }>Shows</p>
+                <p className={lookupTab == true ? "active item" : "item"} onClick={() => {
+                    if(!lookupTab){
+                        setUsersTabActive(false)
+                        setLookupTabActive(true)
+                        setShowTabActive(false)
+                    }
+                    setCurrentTab("look-up")
+                }
+                }>Look-Up</p>
+
+            </div>
+            <div className="ui segment">
+                {userTabActive == true ? renderUserTab() : switchTabs()}
+            </div>
 
         </div>
 
     )
 }
+
+
+
