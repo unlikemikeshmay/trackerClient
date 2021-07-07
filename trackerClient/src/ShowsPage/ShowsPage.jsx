@@ -1,14 +1,16 @@
 import React,{useState,useEffect} from 'react';
 import {Button} from "semantic-ui-react";
 import api from "../_services/api";
+import {AddTool} from "../AddTool";
+import {ShowsList} from "../ShowsList";
 
 export const ShowsPage = () => {
     const [showsList,setShowsList] = useState([])
 
     //tab control
     const [userList,setUserList] = useState([])
-    const [userTabActive, setUsersTabActive] = useState(true)
-    const [showTabActive, setShowTabActive] = useState(false)
+    const [viewShowTabActive, setViewShowTabActive] = useState(true)
+    const [addShowTabActive, setAddShowTabActive] = useState(false)
     const [lookupTab,setLookupTabActive] = useState(false)
     const [currentTab, setCurrentTab] = useState(["users"])
     useEffect(
@@ -36,9 +38,14 @@ export const ShowsPage = () => {
                 'Content-Type': 'application/json',
                 'Authorization': `${auth}`
             }}
-        await api.post('',)
+        await api.post('/shows',conf)
+            .then(
+                res => {
+
+                }
+            )
     }
-    const renderShowTab = () => {
+    const renderAddShowTab = () => {
         return (
             <div className="ui form">
                 <h4 className="ui dividing header">Add Show to database:</h4>
@@ -53,6 +60,18 @@ export const ShowsPage = () => {
             </div>
         )
     }
+    const switchTabs = () => {
+        switch(currentTab){
+            case "add show":
+                return renderAddShowTab();
+            case "view shows":
+                return <ShowsList showsList={showsList.length != 0 ? showsList : ""} />
+            default:
+                return null;
+
+
+        }
+    }
     const buttonStyle = {
         marginTop:'10px',
         backgroundColor:"black",
@@ -61,29 +80,30 @@ export const ShowsPage = () => {
     return (
         <div>
             <div className="ui pointing menu">
-                <p className={userTabActive == true ? "active item" : "item"}  onClick={() => {
-                    console.log("setting current tab to users")
-                    if(!userTabActive){
-                        setUsersTabActive(true)
+                <p className={viewShowTabActive == true ? "active item" : "item"}  onClick={() => {
+                    console.log("setting current tab to view shows")
+                    if(!viewShowTabActive){
+                        setViewShowTabActive(true)
                         setLookupTabActive(false)
-                        setShowTabActive(false)
+                        setAddShowTabActive(false)
                     }
-                    setCurrentTab("users")}
+                    setCurrentTab("view shows")
+                }
                 }>View Shows</p>
-                <p className={showTabActive == true ? "active item" : "item"} onClick={() => {
-                    if(!showTabActive){
-                        setShowTabActive(true)
+                <p className={addShowTabActive == true ? "active item" : "item"} onClick={() => {
+                    if(!addShowTabActive){
+                        setAddShowTabActive(true)
                         setLookupTabActive(false)
-                        setUsersTabActive(false)
+                        setViewShowTabActive(false)
                     }
-                    setCurrentTab("add tool")
+                    setCurrentTab("add show")
                 }
                 }>Add Shows</p>
                 <p className={lookupTab == true ? "active item" : "item"} onClick={() => {
                     if(!lookupTab){
-                        setUsersTabActive(false)
+                        setViewShowTabActive(false)
                         setLookupTabActive(true)
-                        setShowTabActive(false)
+                        setAddShowTabActive(false)
                     }
                     setCurrentTab("look-up")
                 }
@@ -91,7 +111,7 @@ export const ShowsPage = () => {
 
             </div>
             <div className="ui segment">
-                {userTabActive == true ? renderShowTab() : switchTabs()}
+                {viewShowTabActive == true ? renderAddShowTab() : switchTabs()}
             </div>
 
         </div>

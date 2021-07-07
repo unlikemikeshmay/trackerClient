@@ -6,13 +6,13 @@ import {Link} from 'react-router-dom';
 return (
     <div className="ui secondary pointing menu">
         <p className="item" onClick={ () => {props.switch("get-tools")}}>
-        View tools
+        Tools
         </p>
         <p className="item" onClick={ () => {props.switch("view-shows")}}>
-        View Shows
+        Shows
         </p>
         <p className="item" onClick={ () => {props.switch("view-users")}}>
-        View Users
+        Users
         </p>
         <p className="item" onClick={ () => {props.switch("look-up")}}>
         Look Up
