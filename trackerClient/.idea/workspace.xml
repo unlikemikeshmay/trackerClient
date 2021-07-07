@@ -3,7 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="25ca3ca1-cd4a-4dc0-8f16-d11b62dc297f" name="Default Changelist" comment="removed state set from use effect hook and added invocation to function that sets state async">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Header/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Header/Header.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/HomePage/HomePage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/HomePage/HomePage.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ShowsPage/ShowsPage.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/ShowsPage/ShowsPage.jsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ViewTool/ViewTools.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/ViewTool/ViewTools.jsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

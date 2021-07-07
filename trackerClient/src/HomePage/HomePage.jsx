@@ -7,6 +7,7 @@ import {Header} from '../Header';
 import { ViewTools } from '../ViewTool';
 import {AddTool} from '../AddTool';
 import {UserPage} from '../UserPage';
+import {ShowsPage} from "../ShowsPage";
 
 class HomePage extends React.Component {
   constructor(props){
@@ -35,16 +36,16 @@ class HomePage extends React.Component {
       switch (this.state.tab){
         case "get-tools":
           return (
-            localStorage.getItem('user') != null ? <ViewTools switch={this.setStateCallBack.bind(this)}/> : this.props.history.push('/login')
+            localStorage.getItem('user') != null ? <ViewTools redirect={this.redirectOnFinish.bind(this)} switch={this.setStateCallBack.bind(this)}/> : this.props.history.push('/login')
           )
 
-        case "add-tool":
+        case "view-shows":
           return (
-            <AddTool redirect={this.redirectOnFinish.bind(this)}/>
+            <ShowsPage redirect={this.redirectOnFinish.bind(this)}/>
           )
         case "view-users":
           return (
-           <UserPage />
+           <UserPage redirect={this.redirectOnFinish.bind(this)}/>
           )
         case "look-up":
             return (

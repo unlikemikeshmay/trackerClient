@@ -7,6 +7,8 @@ import { Button, Icon, Modal,Form } from 'semantic-ui-react'
 import api from "../_services/api";
 import {history} from "../_helpers";
 import {toolConstants} from "../_constants";
+import {ShowsPage} from "../ShowsPage";
+import {AddTool} from "../AddTool";
 
 const options = [
     { key: '1', text: 'Test Show', value: 'test' },
@@ -24,6 +26,12 @@ const [toolname,setToolName] = useState('');
 const [description,setDescription] = useState('');
 const [showname, setShowname] = useState('')
 const [toggle,setToggle] = useState(false)
+    //tab control
+    const [userList,setUserList] = useState([])
+    const [userTabActive, setUsersTabActive] = useState(true)
+    const [showTabActive, setShowTabActive] = useState(false)
+    const [lookupTab,setLookupTabActive] = useState(false)
+    const [currentTab, setCurrentTab] = useState(["users"])
 
     useEffect(() => {
 
@@ -109,6 +117,44 @@ const openEditModal = (val) => {
     setEditModalOpen(val)
    
 }
+    const switchTabs = () => {
+        switch(currentTab){
+            case "users":
+                return renderUserTab();
+            case "add tool":
+                return <AddTool/>
+            default:
+                return null;
+
+
+        }
+    }
+const renderToolTab = () => {
+    return (
+        <table  className="ui  celled table">
+            <thead className="">
+            <tr className="">
+                <th className="">Id</th>
+                <th className="">Tool Name</th>
+                <th className="">Description</th>
+                <th className="">Showname</th>
+                <th className="">Last User</th>
+                <th className="">Last User Sign out</th>
+                <th className="">Current User</th>
+                <th className="">Current User Sign out</th>
+                <th>Actions</th>
+
+            </tr></thead>
+            <tbody style={{overflowX:'scroll',overflowY:'scroll'}} className="">
+
+            {currentTool != null ? currentTool.map((item,index) => (
+                <ToolItem  deleteTool={props.deleteTool}  setTool={handleTool}  editModal={editModalOpen} toggle={toggleState} setEditModal={openEditModal} item={item} key={index} setDeleteOpen={setDeleteOpen} deleteOpen={deleteOpen}/>
+            )): ""}
+
+            </tbody>
+        </table>
+    )
+}
 
     return (
 
@@ -187,29 +233,43 @@ const openEditModal = (val) => {
         </Modal>
       </Modal>
     </>
+                <div>
+                    <div className="ui pointing menu">
+                        <p className={userTabActive == true ? "active item" : "item"}  onClick={() => {
+                            console.log("setting current tab to users")
+                            if(!userTabActive){
+                                setUsersTabActive(true)
+                                setLookupTabActive(false)
+                                setShowTabActive(false)
+                            }
+                            setCurrentTab("users")}
+                        }>Tools</p>
+                        <p className={showTabActive == true ? "active item" : "item"} onClick={() => {
+                            if(!showTabActive){
+                                setShowTabActive(true)
+                                setLookupTabActive(false)
+                                setUsersTabActive(false)
+                            }
+                            setCurrentTab("add tool")
+                        }
+                        }>Add Tool</p>
+                        <p className={lookupTab == true ? "active item" : "item"} onClick={() => {
+                            if(!lookupTab){
+                                setUsersTabActive(false)
+                                setLookupTabActive(true)
+                                setShowTabActive(false)
+                            }
+                            setCurrentTab("look-up")
+                        }
+                        }>Look-Up</p>
 
-            <table  className="ui  celled table">
-                <thead className="">
-                <tr className="">
-                    <th className="">Id</th>
-                    <th className="">Tool Name</th>
-                    <th className="">Description</th>
-                    <th className="">Showname</th>
-                    <th className="">Last User</th>
-                    <th className="">Last User Sign out</th>
-                    <th className="">Current User</th>
-                    <th className="">Current User Sign out</th>
-                    <th>Actions</th>
+                    </div>
+                    <div className="ui segment">
+                        {userTabActive == true ? renderToolTab() : switchTabs()}
+                    </div>
 
-                </tr></thead>
-                <tbody style={{overflowX:'scroll',overflowY:'scroll'}} className="">
+                </div>
 
-                {currentTool != null ? currentTool.map((item,index) => (
-                    <ToolItem  deleteTool={props.deleteTool}  setTool={handleTool}  editModal={editModalOpen} toggle={toggleState} setEditModal={openEditModal} item={item} key={index} setDeleteOpen={setDeleteOpen} deleteOpen={deleteOpen}/>
-                )): ""}
-
-                </tbody>
-            </table>
 
 
         </div> : <div  className="ui placeholder segment">

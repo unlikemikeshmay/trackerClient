@@ -8,8 +8,8 @@ return (
         <p className="item" onClick={ () => {props.switch("get-tools")}}>
         View tools
         </p>
-        <p className="item" onClick={ () => {props.switch("add-tool")}}>
-        Add Tool
+        <p className="item" onClick={ () => {props.switch("view-shows")}}>
+        View Shows
         </p>
         <p className="item" onClick={ () => {props.switch("view-users")}}>
         View Users
