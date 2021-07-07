@@ -1,7 +1,36 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import {Button} from "semantic-ui-react";
+import api from "../_services/api";
 
 export const ShowsPage = () => {
+    const [showsList,setShowsList] = useState([])
+    useEffect(
+        () => {
+            retrieveShows()
+        },[]
+    )
+    // network calls
+    const retrieveShows = async () => {
+        let auth = JSON.parse(localStorage.getItem('user'))
+        let conf = {headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `${auth}`
+            }}
+        await api.get('/shows',conf)
+            .then(
+                res => {
+                    setShowsList(res.data)
+                }
+            )
+    }
+    const addShow = async () => {
+        let auth = JSON.parse(localStorage.getItem('user'))
+        let conf = {headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `${auth}`
+            }}
+        await api.post('',)
+    }
     const buttonStyle = {
         marginTop:'10px',
         backgroundColor:"black",
