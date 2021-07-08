@@ -3,6 +3,7 @@ import {Button} from "semantic-ui-react";
 import api from "../_services/api";
 import {AddTool} from "../AddTool";
 import {ShowsList} from "../ShowsList";
+import {AddShow} from "../AddShow";
 
 export const ShowsPage = () => {
     const [showsList,setShowsList] = useState([])
@@ -28,44 +29,20 @@ export const ShowsPage = () => {
         await api.get('/shows',conf)
             .then(
                 res => {
-                    setShowsList(res.data)
+                    console.log("res.data in retrieveshows")
+                    console.log(res.data)
+                    setShowsList(res.data.data)
                 }
             )
     }
-    const addShow = async () => {
-        let auth = JSON.parse(localStorage.getItem('user'))
-        let conf = {headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `${auth}`
-            }}
-        await api.post('/shows',conf)
-            .then(
-                res => {
 
-                }
-            )
-    }
-    const renderAddShowTab = () => {
-        return (
-            <div className="ui form">
-                <h4 className="ui dividing header">Add Show to database:</h4>
-                <div className="fields">
-                    <div className="field">
-                        <label>Show name</label>
-                        <input type="text" placeholder="First Name"/>
-                        <Button style={buttonStyle} >Add Show</Button>
-                    </div>
 
-                </div>
-            </div>
-        )
-    }
     const switchTabs = () => {
         switch(currentTab){
             case "add show":
-                return renderAddShowTab();
+                return <AddShow />;
             case "view shows":
-                return <ShowsList showsList={showsList.length != 0 ? showsList : ""} />
+                return ( showsList.length != 0 ? <ShowsList switch={setCurrentTab} showsList={showsList}/> : []);
             default:
                 return null;
 
@@ -111,7 +88,7 @@ export const ShowsPage = () => {
 
             </div>
             <div className="ui segment">
-                {viewShowTabActive == true ? renderAddShowTab() : switchTabs()}
+                {viewShowTabActive == true ? <ShowsList showsList={showsList.length != 0 ? showsList : []} /> : switchTabs()}
             </div>
 
         </div>

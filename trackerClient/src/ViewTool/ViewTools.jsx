@@ -56,9 +56,7 @@ const [toggle,setToggle] = useState(false)
         response = await api.get('/get-tools',conf).then(
             res => {
                response  = res.data;
-               console.log
                 setCurrentTool(res.data)
-
             }
         )
         if (response == "Token is expired"){
@@ -120,7 +118,7 @@ const openEditModal = (val) => {
     const switchTabs = () => {
         switch(currentTab){
             case "users":
-                return renderUserTab();
+                return renderToolTab();
             case "add tool":
                 return <AddTool/>
             default:

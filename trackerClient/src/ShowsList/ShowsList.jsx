@@ -1,7 +1,9 @@
 import React from 'react';
-import {UserRecord} from "../UserRecord";
+import {ShowRecord} from "../ShowRecord";
 
 export const ShowsList = (props) => {
+    console.log("props.showList: ",props.showsList)
+    console.log("props", props)
     return (
         <div className="ui segment">
             <div>
@@ -11,15 +13,17 @@ export const ShowsList = (props) => {
                         <th className="">Id</th>
                         <th className="">Name</th>
                         <th className="">Production</th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody style={{overflowX:'scroll',overflowY:'scroll'}} className="">
-                    {props.showsList != null ? props.showsList.map((item,index) => (
-                        <ShowRecord  item={item} key={index}/>
-                    )): ""}
+                    {props.showsList.length != 0 ? props.showsList.map((item,index) => (
+                        <ShowRecord switch={props.switch} item={item} key={index}/>
+                    )): []}
                     </tbody>
                 </table>
             </div>
         </div>
     )
 }
+/**/
