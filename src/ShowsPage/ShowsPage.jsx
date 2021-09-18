@@ -101,7 +101,13 @@ async deleteShow(id){
         }
         //console.log("show contents: ",show)
         let response = undefined;
-        response = await api.delete(`/shows/${this.state.currentShow[0]}`,conf).then(
+        console.log("DELETE API CALL !!!")
+        console.log("currentshow: ",id)
+        response = await api.delete(`/shows/${id}`,conf)
+        .catch(function (error){
+            console.log(error.toJSON());
+        })
+        .then(
             res => {
                 response  = res.data;
                 console.log("res.data: ",res.data)
@@ -159,18 +165,22 @@ setFirstOpen(bool){
 setSecondOpen(bool){
         this.setState({secondOpen:bool})
 }
-setActionsModal(bool){
+setActionsModal = (bool) => {
         this.setState({actionModal:bool});
 }
-setCurrentShow(show){
+setCurrentShow = (show) => {
+    console.log("set current show: ",show)
+    console.log("set current show: ",show[0])
         this.setState({
             currentShow:[
                 {
-                    uid:show.uid,
-                    show_name:show.show_name,
-                    production:show.production}
+                    uid:show[0],
+                    show_name:show[1],
+                    production:show[2]
+                }
             ]
         })
+        console.log("this.state.currentshow after setcurrentshow: ",this.state.currentShow)
 }
 setOpen(bool){
         this.setState({open:bool})
@@ -274,9 +284,10 @@ render(){
                         </Button>
                         <Button color='green' inverted onClick={() => {
                             console.log("fired delete tdeleteTool(props.item.uid)");
-                            this.handleDeleteShow(this.state.currentShow[0])
+                            this.handleDeleteShow(this.state.currentShow[0].uid)
                             this.setOpen(false)
                             this.setFirstOpen(false);
+                            this.setCurrentShow
                         }
                         }>
                             <Icon name='checkmark' /> Yes

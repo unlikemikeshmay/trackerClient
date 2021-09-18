@@ -13,12 +13,13 @@ export const ShowRecord = (props) => {
             <td className="">{props.item.production}</td>
             <button className="ui button" onClick={() => {
                console.log("inside showrec")
-               console.log("props.item: ",props.item)
+               console.log("props.item in showrec: ",props.item)
                 let newShow = [
                    props.item.uid,
                     props.item.show_name,
                     props.item.production
                 ]
+                console.log("new show passed to setcurrentshow: ",newShow)
                props.setCurrentShow(newShow)
                 props.setActionsModal(!props.editModal)
 
