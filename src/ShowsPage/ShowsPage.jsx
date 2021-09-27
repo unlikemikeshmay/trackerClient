@@ -104,15 +104,17 @@ async deleteShow(id){
         console.log("DELETE API CALL !!!")
         console.log("currentshow: ",id)
         response = await api.delete(`/shows/${id}`,conf)
-        .catch(function (error){
-            console.log(error.toJSON());
-        })
+        
         .then(
             res => {
                 response  = res.data;
                 console.log("res.data: ",res.data)
             }
         )
+        .catch(function (error){
+            console.log("inside catch in delete show")
+            console.log(error.toJSON());
+        })
         if (response === "Token is expired"){
             localStorage.removeItem("user");
             history.push('/login');
@@ -146,6 +148,7 @@ handleSubmit(){
 
     }
 handleDeleteShow(id){
+
     this.deleteShow(id);
     this.setState({deleteOpen:false});
 
@@ -283,11 +286,11 @@ render(){
                             <Icon name='remove' /> No
                         </Button>
                         <Button color='green' inverted onClick={() => {
-                            console.log("fired delete tdeleteTool(props.item.uid)");
-                            this.handleDeleteShow(this.state.currentShow[0].uid)
+                            console.log(`fired delete tdeleteTool(props.itedeleteShowm.uid): ${this.state.currentShow.uid}`);
+                            this.handleDeleteShow(this.state.currentShow)
                             this.setOpen(false)
                             this.setFirstOpen(false);
-                            this.setCurrentShow
+                            this.setCurrentShow(["","",""])
                         }
                         }>
                             <Icon name='checkmark' /> Yes
